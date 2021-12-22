@@ -196,7 +196,7 @@ class _InstagramMediaPickerState extends State<InstagramMediaPicker> {
 
   _getShortLivedToken(map) async {
     String urlTwo = 'https://api.instagram.com/oauth/access_token';
-    http.Response response = await http.post(urlTwo, body: map);
+    http.Response response = await http.post(Uri(path: urlTwo), body: map);
     var respData = json.decode(response.body);
     setState(() {
       accessToken = respData['access_token'];
@@ -212,7 +212,7 @@ class _InstagramMediaPickerState extends State<InstagramMediaPicker> {
         '/media?access_token=' +
         accessToken +
         '&fields=timestamp,media_url,media_type,caption';
-    http.Response response = await http.get(urlThree);
+    http.Response response = await http.get(Uri(path: urlThree));
     respData = (json.decode(response.body))['data'];
     for (var i = 0; i < respData.length; i++) {
       if ((respData[i])['media_type'] == 'IMAGE') {
